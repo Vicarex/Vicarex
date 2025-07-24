@@ -1,149 +1,155 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": []
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vicarex - Because You Care. So Do We.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f6fef8;
+      color: #222;
+      line-height: 1.6;
     }
-  },
-  "cells": [
-    {
-      "cell_type": "code",
-      "execution_count": null,
-      "metadata": {
-        "id": "LDEz_ygUjEiU"
-      },
-      "outputs": [],
-      "source": [
-        "import os\n",
-        "from zipfile import ZipFile\n",
-        "import requests\n",
-        "\n",
-        "# HTML content\n",
-        "html_content = \"\"\"<!DOCTYPE html>\n",
-        "<html lang=\"en\">\n",
-        "<head>\n",
-        "  <meta charset=\"UTF-8\" />\n",
-        "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n",
-        "  <title>Vicarex Health</title>\n",
-        "  <style>\n",
-        "    body { font-family: Arial; margin: 0; background: #f4fdf6; color: #234534; }\n",
-        "    header { text-align: center; padding: 30px 20px; background: #ffffff; }\n",
-        "    header img { max-width: 180px; }\n",
-        "    h1 { font-size: 28px; margin-top: 10px; }\n",
-        "    section { padding: 40px 20px; text-align: center; }\n",
-        "    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }\n",
-        "    .grid-item { background: white; padding: 20px; border-radius: 10px; width: 280px;\n",
-        "                 box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n",
-        "    .grid-item img { width: 100%; border-radius: 8px; }\n",
-        "    .contact, .trust { background: #e8f5ec; padding: 30px 20px; }\n",
-        "    footer { text-align: center; padding: 20px; background: #d6f0dc; font-size: 14px; }\n",
-        "  </style>\n",
-        "</head>\n",
-        "<body>\n",
-        "  <header>\n",
-        "    <img src=\"logo.png\" alt=\"Vicarex Logo\" />\n",
-        "    <h1>Because You Care. So Do We.</h1>\n",
-        "  </header>\n",
-        "  <section>\n",
-        "    <h2>Who We Are</h2>\n",
-        "    <p>Vicarex is a trusted medical supply company proudly serving the Tri-State area — and beyond — for over a decade.\n",
-        "    With years of experience, exceptional service, and consistent positive feedback from clients, we’ve built a name that professionals rely on.\n",
-        "    Whether you're a clinic, caregiver, or hospital, we deliver care you can count on.</p>\n",
-        "  </section>\n",
-        "  <section>\n",
-        "    <h2>What We Offer</h2>\n",
-        "    <div class=\"grid\">\n",
-        "      <div class=\"grid-item\">\n",
-        "        <img src=\"gloves.jpg\" alt=\"Gloves\" />\n",
-        "        <h3>Protective Wear</h3>\n",
-        "        <p>Gloves, masks, gowns, aprons</p>\n",
-        "      </div>\n",
-        "      <div class=\"grid-item\">\n",
-        "        <img src=\"sanitizer.jpg\" alt=\"Sanitizers\" />\n",
-        "        <h3>Sanitation & Hygiene</h3>\n",
-        "        <p>Sanitizers, wipes, disinfectants</p>\n",
-        "      </div>\n",
-        "      <div class=\"grid-item\">\n",
-        "        <img src=\"woundcare.jpg\" alt=\"Wound Care\" />\n",
-        "        <h3>Patient & Medical Care</h3>\n",
-        "        <p>Wound care, diagnostics, incontinence</p>\n",
-        "      </div>\n",
-        "      <div class=\"grid-item\">\n",
-        "        <img src=\"walker.jpg\" alt=\"Walker\" />\n",
-        "        <h3>Support & Mobility</h3>\n",
-        "        <p>Walkers, wheelchairs, accessories</p>\n",
-        "      </div>\n",
-        "    </div>\n",
-        "  </section>\n",
-        "  <section class=\"contact\">\n",
-        "    <h2>Contact Us</h2>\n",
-        "    <p><strong>Phone:</strong> (914) 222-1535<br />\n",
-        "    <strong>Email:</strong> vicarexhealth@gmail.com</p>\n",
-        "  </section>\n",
-        "  <section class=\"trust\">\n",
-        "    <div class=\"grid\">\n",
-        "      <div class=\"grid-item\">\n",
-        "        <h3>Reliable Service</h3>\n",
-        "        <p>On-time, every time.</p>\n",
-        "      </div>\n",
-        "      <div class=\"grid-item\">\n",
-        "        <h3>Trusted by Professionals</h3>\n",
-        "        <p>Feedback-backed, client-trusted.</p>\n",
-        "      </div>\n",
-        "      <div class=\"grid-item\">\n",
-        "        <h3>Decade of Experience</h3>\n",
-        "        <p>Built on care and consistency.</p>\n",
-        "      </div>\n",
-        "    </div>\n",
-        "  </section>\n",
-        "  <footer>\n",
-        "    Website launching soon. Stay connected.\n",
-        "  </footer>\n",
-        "</body>\n",
-        "</html>\n",
-        "\"\"\"\n",
-        "\n",
-        "# Create folder\n",
-        "folder = \"vicarex_landing\"\n",
-        "os.makedirs(folder, exist_ok=True)\n",
-        "\n",
-        "# Save HTML\n",
-        "with open(os.path.join(folder, \"index.html\"), \"w\", encoding=\"utf-8\") as f:\n",
-        "    f.write(html_content)\n",
-        "\n",
-        "# Images to download\n",
-        "images = {\n",
-        "    \"logo.png\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Health_icon.svg/1024px-Health_icon.svg.png\",\n",
-        "    \"gloves.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/4/42/Nitrile_Gloves.jpg\",\n",
-        "    \"sanitizer.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/f/fd/Hand_sanitizer.jpg\",\n",
-        "    \"woundcare.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/1/1b/Bandages.jpg\",\n",
-        "    \"walker.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/d/dc/Walker_example.jpg\"\n",
-        "}\n",
-        "\n",
-        "# Download images\n",
-        "for name, url in images.items():\n",
-        "    img = requests.get(url)\n",
-        "    with open(os.path.join(folder, name), \"wb\") as f:\n",
-        "        f.write(img.content)\n",
-        "\n",
-        "# Zip the result\n",
-        "zip_name = \"vicarex_landing_page.zip\"\n",
-        "with ZipFile(zip_name, \"w\") as zipf:\n",
-        "    for root, dirs, files in os.walk(folder):\n",
-        "        for file in files:\n",
-        "            full_path = os.path.join(root, file)\n",
-        "            zipf.write(full_path, os.path.relpath(full_path, folder))\n",
-        "\n",
-        "print(\"✅ Your landing page zip is ready: vicarex_landing_page.zip\")\n"
-      ]
+    header {
+      background: linear-gradient(rgba(0, 100, 80, 0.6), rgba(0, 100, 80, 0.6)), url('https://source.unsplash.com/1600x900/?hospital,care') no-repeat center center/cover;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
-  ]
-}
+    header img {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin: 0 0 10px;
+    }
+    p.lead {
+      font-size: 1.4rem;
+      max-width: 700px;
+    }
+    section {
+      padding: 70px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 250px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.07);
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      columns: 2;
+    }
+    ul li {
+      margin: 12px 0;
+      padding-left: 25px;
+      position: relative;
+      font-size: 1.1rem;
+    }
+    ul li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      color: #2d9970;
+      font-size: 1.2rem;
+    }
+    .highlight {
+      font-size: 1.4rem;
+      text-align: center;
+      padding: 40px;
+      background: #defae7;
+      border-left: 6px solid #2d9970;
+      margin: 60px auto;
+      max-width: 850px;
+    }
+    .contact {
+      background: #2d9970;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .contact p {
+      font-size: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 1rem;
+      background: #e6f4ed;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="A_logo_for_a_company_named_Vicarex_features_a_gree.png" alt="Vicarex logo" />
+    <h1>Vicarex</h1>
+    <p class="lead">Because You Care. So Do We.</p>
+  </header>
+
+  <section>
+    <h2>What We Offer</h2>
+    <ul>
+      <li>Wound Care Kits & Supplies</li>
+      <li>Gloves, Masks, PPE</li>
+      <li>Sanitizers & Cleaning Products</li>
+      <li>Mobility Aids (Walkers, Canes)</li>
+      <li>Incontinence Products</li>
+      <li>Thermometers, Oximeters & More</li>
+      <li>Custom Packed Medical Kits</li>
+      <li>Special Homecare Bundles</li>
+    </ul>
+  </section>
+
+  <div class="highlight">
+    💡 Trusted by clinics, loved by caregivers. Quality you can depend on — backed by experience.
+  </div>
+
+  <section>
+    <h2 style="text-align:center;">See Our Products in Action</h2>
+    <div class="gallery">
+      <img src="https://source.unsplash.com/featured/?medical-gloves" alt="Medical Gloves">
+      <img src="https://source.unsplash.com/featured/?doctor-patient" alt="Doctor and Patient">
+      <img src="https://source.unsplash.com/featured/?wound-care" alt="Wound Care Kit">
+      <img src="https://source.unsplash.com/featured/?pulse-oximeter" alt="Oximeter">
+      <img src="https://source.unsplash.com/featured/?sanitizer" alt="Sanitizer">
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Get in Touch</h2>
+    <p>Email us: <strong>vicarexhealth@gmail.com</strong></p>
+    <p>Call or Text: <strong>914-222-1535</strong></p>
+    <p>Ask about your FREE trial wound care kit!</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Vicarex. All rights reserved.
+  </footer>
+</body>
+</html>
