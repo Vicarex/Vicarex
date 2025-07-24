@@ -1,124 +1,149 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Business Landing Page</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      color: #333;
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
     }
-    header {
-      background-color: #003366;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "LDEz_ygUjEiU"
+      },
+      "outputs": [],
+      "source": [
+        "import os\n",
+        "from zipfile import ZipFile\n",
+        "import requests\n",
+        "\n",
+        "# HTML content\n",
+        "html_content = \"\"\"<!DOCTYPE html>\n",
+        "<html lang=\"en\">\n",
+        "<head>\n",
+        "  <meta charset=\"UTF-8\" />\n",
+        "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n",
+        "  <title>Vicarex Health</title>\n",
+        "  <style>\n",
+        "    body { font-family: Arial; margin: 0; background: #f4fdf6; color: #234534; }\n",
+        "    header { text-align: center; padding: 30px 20px; background: #ffffff; }\n",
+        "    header img { max-width: 180px; }\n",
+        "    h1 { font-size: 28px; margin-top: 10px; }\n",
+        "    section { padding: 40px 20px; text-align: center; }\n",
+        "    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }\n",
+        "    .grid-item { background: white; padding: 20px; border-radius: 10px; width: 280px;\n",
+        "                 box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n",
+        "    .grid-item img { width: 100%; border-radius: 8px; }\n",
+        "    .contact, .trust { background: #e8f5ec; padding: 30px 20px; }\n",
+        "    footer { text-align: center; padding: 20px; background: #d6f0dc; font-size: 14px; }\n",
+        "  </style>\n",
+        "</head>\n",
+        "<body>\n",
+        "  <header>\n",
+        "    <img src=\"logo.png\" alt=\"Vicarex Logo\" />\n",
+        "    <h1>Because You Care. So Do We.</h1>\n",
+        "  </header>\n",
+        "  <section>\n",
+        "    <h2>Who We Are</h2>\n",
+        "    <p>Vicarex is a trusted medical supply company proudly serving the Tri-State area — and beyond — for over a decade.\n",
+        "    With years of experience, exceptional service, and consistent positive feedback from clients, we’ve built a name that professionals rely on.\n",
+        "    Whether you're a clinic, caregiver, or hospital, we deliver care you can count on.</p>\n",
+        "  </section>\n",
+        "  <section>\n",
+        "    <h2>What We Offer</h2>\n",
+        "    <div class=\"grid\">\n",
+        "      <div class=\"grid-item\">\n",
+        "        <img src=\"gloves.jpg\" alt=\"Gloves\" />\n",
+        "        <h3>Protective Wear</h3>\n",
+        "        <p>Gloves, masks, gowns, aprons</p>\n",
+        "      </div>\n",
+        "      <div class=\"grid-item\">\n",
+        "        <img src=\"sanitizer.jpg\" alt=\"Sanitizers\" />\n",
+        "        <h3>Sanitation & Hygiene</h3>\n",
+        "        <p>Sanitizers, wipes, disinfectants</p>\n",
+        "      </div>\n",
+        "      <div class=\"grid-item\">\n",
+        "        <img src=\"woundcare.jpg\" alt=\"Wound Care\" />\n",
+        "        <h3>Patient & Medical Care</h3>\n",
+        "        <p>Wound care, diagnostics, incontinence</p>\n",
+        "      </div>\n",
+        "      <div class=\"grid-item\">\n",
+        "        <img src=\"walker.jpg\" alt=\"Walker\" />\n",
+        "        <h3>Support & Mobility</h3>\n",
+        "        <p>Walkers, wheelchairs, accessories</p>\n",
+        "      </div>\n",
+        "    </div>\n",
+        "  </section>\n",
+        "  <section class=\"contact\">\n",
+        "    <h2>Contact Us</h2>\n",
+        "    <p><strong>Phone:</strong> (914) 222-1535<br />\n",
+        "    <strong>Email:</strong> vicarexhealth@gmail.com</p>\n",
+        "  </section>\n",
+        "  <section class=\"trust\">\n",
+        "    <div class=\"grid\">\n",
+        "      <div class=\"grid-item\">\n",
+        "        <h3>Reliable Service</h3>\n",
+        "        <p>On-time, every time.</p>\n",
+        "      </div>\n",
+        "      <div class=\"grid-item\">\n",
+        "        <h3>Trusted by Professionals</h3>\n",
+        "        <p>Feedback-backed, client-trusted.</p>\n",
+        "      </div>\n",
+        "      <div class=\"grid-item\">\n",
+        "        <h3>Decade of Experience</h3>\n",
+        "        <p>Built on care and consistency.</p>\n",
+        "      </div>\n",
+        "    </div>\n",
+        "  </section>\n",
+        "  <footer>\n",
+        "    Website launching soon. Stay connected.\n",
+        "  </footer>\n",
+        "</body>\n",
+        "</html>\n",
+        "\"\"\"\n",
+        "\n",
+        "# Create folder\n",
+        "folder = \"vicarex_landing\"\n",
+        "os.makedirs(folder, exist_ok=True)\n",
+        "\n",
+        "# Save HTML\n",
+        "with open(os.path.join(folder, \"index.html\"), \"w\", encoding=\"utf-8\") as f:\n",
+        "    f.write(html_content)\n",
+        "\n",
+        "# Images to download\n",
+        "images = {\n",
+        "    \"logo.png\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Health_icon.svg/1024px-Health_icon.svg.png\",\n",
+        "    \"gloves.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/4/42/Nitrile_Gloves.jpg\",\n",
+        "    \"sanitizer.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/f/fd/Hand_sanitizer.jpg\",\n",
+        "    \"woundcare.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/1/1b/Bandages.jpg\",\n",
+        "    \"walker.jpg\": \"https://upload.wikimedia.org/wikipedia/commons/d/dc/Walker_example.jpg\"\n",
+        "}\n",
+        "\n",
+        "# Download images\n",
+        "for name, url in images.items():\n",
+        "    img = requests.get(url)\n",
+        "    with open(os.path.join(folder, name), \"wb\") as f:\n",
+        "        f.write(img.content)\n",
+        "\n",
+        "# Zip the result\n",
+        "zip_name = \"vicarex_landing_page.zip\"\n",
+        "with ZipFile(zip_name, \"w\") as zipf:\n",
+        "    for root, dirs, files in os.walk(folder):\n",
+        "        for file in files:\n",
+        "            full_path = os.path.join(root, file)\n",
+        "            zipf.write(full_path, os.path.relpath(full_path, folder))\n",
+        "\n",
+        "print(\"✅ Your landing page zip is ready: vicarex_landing_page.zip\")\n"
+      ]
     }
-    header img {
-      height: 60px;
-    }
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      background-image: url('https://via.placeholder.com/1600x600');
-      background-size: cover;
-      background-position: center;
-      color: white;
-    }
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 20px;
-    }
-    .about {
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .about img {
-      max-width: 100%;
-      height: auto;
-    }
-    .services {
-      background-color: #f4f4f4;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .services img {
-      width: 100%;
-      max-width: 400px;
-      margin: 20px auto;
-    }
-    .tagline {
-      font-size: 18px;
-      margin: 30px auto;
-      color: #003366;
-      font-weight: bold;
-    }
-    footer {
-      background-color: #003366;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    @media (min-width: 768px) {
-      .services-grid {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-      }
-      .services-grid div {
-        width: 30%;
-        margin-bottom: 20px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <img src="https://via.placeholder.com/150x60?text=LOGO" alt="Company Logo">
-  </header>
-
-  <section class="hero">
-    <h1>Professional Brisket Services</h1>
-    <p>Slow-cooked, flavor-packed, and served with passion — coast to coast.</p>
-  </section>
-
-  <section class="about">
-    <h2>About Us</h2>
-    <p>Proudly servicing <strong>all 50 states</strong> for over <strong>25 years</strong>.</p>
-    <img src="https://via.placeholder.com/800x400" alt="About Us Image">
-  </section>
-
-  <section class="services">
-    <h2>What We Offer</h2>
-    <div class="services-grid">
-      <div>
-        <img src="https://via.placeholder.com/400x300" alt="Service 1">
-        <p>Slow-roasted brisket made with premium cuts.</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/400x300" alt="Service 2">
-        <p>Family recipes with a modern twist — perfect every time.</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/400x300" alt="Service 3">
-        <p>Delivered hot and ready across the country.</p>
-      </div>
-    </div>
-    <p class="tagline">We’ve been servicing all 50 states for decades with unmatched quality and care.</p>
-  </section>
-
-  <footer>
-    <p>“Building trust one client at a time — coast to coast.”</p>
-  </footer>
-
-</body>
-</html>
+  ]
+}
