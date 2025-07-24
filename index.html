@@ -3,154 +3,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vicarex - Because You Care. So Do We.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vicarex - Because You Care</title>
   <style>
-    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f6fef8;
+      font-family: Arial, sans-serif;
+      background-color: #f6fefe;
       color: #222;
-      line-height: 1.6;
     }
     header {
-      background: linear-gradient(rgba(0, 100, 80, 0.6), rgba(0, 100, 80, 0.6)), url('https://source.unsplash.com/1600x900/?hospital,care') no-repeat center center/cover;
-      height: 100vh;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background-color: #e6ffed;
+      padding: 2rem;
       text-align: center;
     }
     header img {
-      width: 180px;
-      margin-bottom: 20px;
+      max-width: 220px;
+      height: auto;
     }
-    h1 {
-      font-size: 3rem;
-      margin: 0 0 10px;
-    }
-    p.lead {
-      font-size: 1.4rem;
-      max-width: 700px;
+    .slogan {
+      font-size: 1.2rem;
+      color: #4caf50;
+      margin-top: 0.5rem;
     }
     section {
-      padding: 70px 20px;
-      max-width: 1100px;
+      padding: 2rem;
+      max-width: 1000px;
       margin: auto;
+    }
+    h2 {
+      color: #2e7d32;
+      text-align: center;
     }
     .gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
       justify-content: center;
-    }
-    .gallery .item {
-      width: 260px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-      background: white;
-    }
-    .gallery .item:hover {
-      transform: scale(1.05);
+      gap: 1rem;
+      margin-top: 2rem;
     }
     .gallery img {
-      width: 100%;
-      height: 160px;
+      width: 200px;
+      height: 150px;
       object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s;
     }
-    .gallery h3 {
-      margin: 0;
-      padding: 15px;
-      font-size: 1.1rem;
-      background: #f4fbf7;
-      color: #2d9970;
-      text-align: center;
-    }
-    .highlight {
-      font-size: 1.4rem;
-      text-align: center;
-      padding: 40px;
-      background: #defae7;
-      border-left: 6px solid #2d9970;
-      margin: 60px auto;
-      max-width: 850px;
-    }
-    .contact {
-      background: #2d9970;
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
-    }
-    .contact p {
-      font-size: 1.2rem;
+    .gallery img:hover {
+      transform: scale(1.05);
     }
     footer {
+      background-color: #e6ffed;
       text-align: center;
-      padding: 25px;
-      font-size: 1rem;
-      background: #e6f4ed;
-      color: #555;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+    .contact {
+      text-align: center;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="A_logo_for_a_company_named_Vicarex_features_a_gree.png" alt="Vicarex logo" />
-    <h1>Vicarex</h1>
-    <p class="lead">Because You Care. So Do We.</p>
+    <img src="https://i.imgur.com/RF8LQNY.png" alt="Vicarex Logo" />
+    <div class="slogan">Because You Care</div>
   </header>
 
   <section>
-    <h2 style="text-align:center;">What We Offer</h2>
+    <h2>Medical Supplies & Care Solutions</h2>
+    <p style="text-align: center;">
+      Serving the Tri-State area and all 50 states for over a decade. No obligation — just care.
+    </p>
+
     <div class="gallery">
-      <div class="item">
-        <img src="https://source.unsplash.com/featured/?healthcare-doctor" alt="Doctor Consultation">
-        <h3>Patient & Provider Care</h3>
-      </div>
-      <div class="item">
-        <img src="https://source.unsplash.com/featured/?wound-care" alt="Wound Supplies">
-        <h3>Wound Care Supplies</h3>
-      </div>
-      <div class="item">
-        <img src="https://source.unsplash.com/featured/?medical-gloves" alt="Protective Gloves">
-        <h3>Protective Gear</h3>
-      </div>
-      <div class="item">
-        <img src="https://source.unsplash.com/featured/?sanitizer" alt="Sanitizing Products">
-        <h3>Sanitation & Hygiene</h3>
-      </div>
-      <div class="item">
-        <img src="https://source.unsplash.com/featured/?medical-kit" alt="Custom Kits">
-        <h3>Custom Medical Kits</h3>
-      </div>
-      <div class="item">
-        <img src="https://source.unsplash.com/featured/?health-supplies" alt="General Supplies">
-        <h3>General Medical Supplies</h3>
-      </div>
+      <img src="https://images.unsplash.com/photo-1588776814546-ec7abf92fce0?auto=format&fit=crop&w=600&q=60" alt="Medical Mask" />
+      <img src="https://images.unsplash.com/photo-1612277794660-740cbe04e7c1?auto=format&fit=crop&w=600&q=60" alt="Gloves" />
+      <img src="https://images.unsplash.com/photo-1588776814481-4e26ebf5d4c7?auto=format&fit=crop&w=600&q=60" alt="Sanitizer" />
+      <img src="https://images.unsplash.com/photo-1588776814479-9e8dbfa69f0a?auto=format&fit=crop&w=600&q=60" alt="Oximeter" />
+      <img src="https://images.unsplash.com/photo-1583947582886-f3652a079b37?auto=format&fit=crop&w=600&q=60" alt="Doctor Care" />
+      <img src="https://images.unsplash.com/photo-1580281657527-47d48b9c73a3?auto=format&fit=crop&w=600&q=60" alt="Wheelchair" />
     </div>
-    <p style="text-align:center; font-size: 1rem; margin-top: 25px; color: #666;">🔗 Full website coming soon — links will open product pages & pricing.</p>
-  </section>
 
-  <div class="highlight">
-    💡 Trusted by clinics, loved by caregivers. Quality you can depend on — backed by experience.
-  </div>
-
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <strong>vicarexhealth@gmail.com</strong></p>
-    <p>Call/Text: <strong>914-222-1535</strong></p>
-    <p>Ask about your FREE wound care kit — no obligation, just care.</p>
+    <div class="contact">
+      <p><strong>Contact us:</strong></p>
+      <p>📧 vicarexhealth@gmail.com</p>
+      <p>📞 914-222-1535</p>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 Vicarex. All rights reserved.
+    &copy; 2025 Vicarex Health. All rights reserved.
   </footer>
 </body>
 </html>
